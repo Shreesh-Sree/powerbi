@@ -1,0 +1,20 @@
+relationship 9d98f6eb-95c2-4a7b-9ff4-fd641e82fc16
+	fromColumn: Account.CustomerID
+	toColumn: Customer.CustomerID
+
+relationship 64885181-a843-4912-8aa5-195584eca087
+	fromColumn: Account.BranchID
+	toColumn: Branch.BranchID
+
+relationship 23ebfbd6-0396-44d7-965d-42ee7d197050
+	fromColumn: Transactions.AccountID
+	toColumn: Account.AccountID
+
+relationship 2a0d4b1a-298b-414b-a867-5ac43718e79d
+	fromColumn: Transactions.TxnDate
+	toColumn: Date.Date
+
+relationship f42e74d1-ed71-4245-9c70-f895ada3192d
+	isActive: false
+	fromColumn: Transactions.SettlementDate
+	toColumn: Date.Date

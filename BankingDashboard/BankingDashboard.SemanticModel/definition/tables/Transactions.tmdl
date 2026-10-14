@@ -1,0 +1,142 @@
+table Transactions
+	lineageTag: dc5be558-9edf-4d50-9403-51d8dafd43c8
+
+	column TxnID
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 0f9cfffe-02df-4d59-a2dc-a40faebf2b30
+		summarizeBy: none
+		sourceColumn: TxnID
+
+	column AccountID
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 1eff09f7-c2bc-4d8f-b27a-fa8c397fa7fc
+		summarizeBy: none
+		sourceColumn: AccountID
+
+	column TxnDate
+		dataType: dateTime
+		formatString: dd-MMM-yyyy
+		lineageTag: 85bb8d5e-3a8d-454d-a179-72817594d31a
+		summarizeBy: none
+		sourceColumn: TxnDate
+
+	column SettlementDate
+		dataType: dateTime
+		formatString: dd-MMM-yyyy
+		lineageTag: 12245d3b-10c0-45c3-82e3-1d4750d80fd8
+		summarizeBy: none
+		sourceColumn: SettlementDate
+
+	column TxnType
+		dataType: string
+		lineageTag: 7d79517f-396f-4cd4-b1ee-15bc3e9def80
+		summarizeBy: none
+		sourceColumn: TxnType
+
+	column Amount
+		dataType: double
+		formatString: #,0.00
+		lineageTag: 6098a0ee-a6a9-4265-8e90-65d987ef7aa0
+		summarizeBy: sum
+		sourceColumn: Amount
+
+	measure 'Total Deposits' = CALCULATE(SUM(Transactions[Amount]), Transactions[TxnType] = "Deposit")
+		formatString: #,0
+		lineageTag: 3156f85f-f8e6-4749-84d1-d0ed251518c0
+		displayFolder: Base
+	measure 'Total Withdrawals' = CALCULATE(SUM(Transactions[Amount]), Transactions[TxnType] = "Withdraw")
+		formatString: #,0
+		lineageTag: 3a9e72a9-6d2f-420e-8efd-8d243f55ca5f
+		displayFolder: Base
+	measure 'Total Txn Value' = SUM(Transactions[Amount])
+		formatString: #,0
+		lineageTag: c201075b-fe9d-4594-b926-730068b52c41
+		displayFolder: Base
+	measure 'Txn Count' = COUNTROWS(Transactions)
+		formatString: #,0
+		lineageTag: fe6f0f59-f64d-42d8-92bf-360cbddf97f9
+		displayFolder: Base
+	measure 'Total Balance' = SUM(Account[Balance])
+		formatString: #,0
+		lineageTag: 46176bb8-88dd-410a-ba33-e62f40d99ef4
+		displayFolder: Base
+	measure Accounts = COUNTROWS(Account)
+		formatString: #,0
+		lineageTag: d8fe9636-527d-4080-adaa-68ff227f6bbb
+		displayFolder: Base
+	measure Customers = DISTINCTCOUNT(Account[CustomerID])
+		formatString: #,0
+		lineageTag: 0bd46a4c-fc70-4352-931f-2bed7f691a4b
+		displayFolder: Base
+	measure 'Avg Balance' = AVERAGE(Account[Balance])
+		formatString: #,0
+		lineageTag: da475b9f-7615-42ef-8fb5-de38704bfdb2
+		displayFolder: Base
+	measure 'South Deposits' = CALCULATE([Total Deposits], Branch[Region] = "South")
+		formatString: #,0
+		lineageTag: af33b0b3-a69e-4e77-b00f-19d4c932d00e
+		displayFolder: Region (CALCULATE / ALL)
+	measure 'Chennai Deposits' = CALCULATE([Total Deposits], FILTER(Branch, Branch[City] = "Chennai"))
+		formatString: #,0
+		lineageTag: 60fc291d-2388-4d47-a485-3c5df8b6d315
+		displayFolder: Region (CALCULATE / ALL)
+	measure 'All Region Deposits' = CALCULATE([Total Deposits], ALL(Branch[Region]))
+		formatString: #,0
+		lineageTag: 3e9109e0-2dba-4d63-a4cd-161b5d4cf66d
+		displayFolder: Region (CALCULATE / ALL)
+	measure 'Region Share %' = DIVIDE([Total Deposits], [All Region Deposits])
+		formatString: 0.0%
+		lineageTag: 21400aa1-87e2-4928-be38-a41a950c800f
+		displayFolder: Region (CALCULATE / ALL)
+	measure 'Deposits YTD' = TOTALYTD([Total Deposits], 'Date'[Date])
+		formatString: #,0
+		lineageTag: 9f061e7f-c96f-4f2f-b565-8e52efa4c339
+		displayFolder: Time Intelligence
+	measure 'Deposits MTD' = TOTALMTD([Total Deposits], 'Date'[Date])
+		formatString: #,0
+		lineageTag: 4d31a35c-1b8b-4b2b-aa66-136cabcd65d3
+		displayFolder: Time Intelligence
+	measure 'Deposits QTD' = TOTALQTD([Total Deposits], 'Date'[Date])
+		formatString: #,0
+		lineageTag: 17f0297d-bacd-4fe8-a00f-68b0ca826f3d
+		displayFolder: Time Intelligence
+	measure 'Deposits LY' = CALCULATE([Total Deposits], SAMEPERIODLASTYEAR('Date'[Date]))
+		formatString: #,0
+		lineageTag: ef743cec-c536-4a2a-8ce1-690350a2dd57
+		displayFolder: Time Intelligence
+	measure 'YoY Growth %' = DIVIDE([Total Deposits] - [Deposits LY], [Deposits LY])
+		formatString: 0.0%
+		lineageTag: 68e08b8c-42ef-4f10-b6f4-61e9c327406d
+		displayFolder: Time Intelligence
+	measure 'Deposits by Settlement Date' = CALCULATE([Total Deposits], USERELATIONSHIP('Date'[Date], Transactions[SettlementDate]))
+		formatString: #,0
+		lineageTag: 16446d7c-62b2-49fa-af95-ab15c75c23cf
+		displayFolder: Settlement (USERELATIONSHIP)
+	measure 'Avg Settlement Days' = AVERAGEX(Transactions, DATEDIFF(Transactions[TxnDate], Transactions[SettlementDate], DAY))
+		formatString: 0.00
+		lineageTag: 7dd279c1-8753-4710-a9a2-23c40025a496
+		displayFolder: Settlement (USERELATIONSHIP)
+	measure 'Selected Region' = SELECTEDVALUE(Branch[Region], "All Regions")
+		formatString: 0
+		lineageTag: 599dad08-1a03-40e1-bbe1-d48aca31e3ea
+		displayFolder: Dynamic
+	measure 'Report Title' = "Banking Performance: " & [Selected Region] & " | Deposits " & FORMAT([Total Deposits], "#,0")
+		formatString: 0
+		lineageTag: f4c8da13-ca41-442c-8095-bb751947d4b7
+		displayFolder: Dynamic
+
+	partition Transactions = m
+		mode: import
+		source =
+				let
+					Source = Json.Document(Binary.Decompress(Binary.FromText("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", BinaryEncoding.Base64), Compression.Deflate)),
+					Table = Table.FromRows(Source, {"TxnID", "AccountID", "TxnDate", "SettlementDate", "TxnType", "Amount"}),
+					Typed = Table.TransformColumnTypes(Table, {{"TxnID", Int64.Type}, {"AccountID", Int64.Type}, {"TxnDate", type date}, {"SettlementDate", type date}, {"TxnType", type text}, {"Amount", type number}}, "en-US")
+				in
+					Typed
+
+	annotation PBI_ResultType = Table

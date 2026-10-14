@@ -1,0 +1,64 @@
+table Account
+	lineageTag: 2b5713e8-58f4-404b-a696-6646c556c327
+
+	column AccountID
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 2a1b4ab5-b1b1-429a-97c3-ebbf43177711
+		summarizeBy: none
+		sourceColumn: AccountID
+
+	column CustomerID
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 9a3e2ea6-99dd-4dab-991f-d2ddab4e0efb
+		summarizeBy: none
+		sourceColumn: CustomerID
+
+	column BranchID
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 82b52e57-9c8f-4815-9d4f-85e295b7d0ac
+		summarizeBy: none
+		sourceColumn: BranchID
+
+	column AccountType
+		dataType: string
+		lineageTag: 9a796634-cf61-4c63-80a9-9e9e43e9a831
+		summarizeBy: none
+		sourceColumn: AccountType
+
+	column Balance
+		dataType: double
+		formatString: #,0.00
+		lineageTag: 8cc71901-5338-4a21-b3ce-b6e008d4d390
+		summarizeBy: sum
+		sourceColumn: Balance
+
+	column OpenDate
+		dataType: dateTime
+		formatString: dd-MMM-yyyy
+		lineageTag: 26d3712d-7d10-4139-8b39-1e03737775b5
+		summarizeBy: none
+		sourceColumn: OpenDate
+
+	column BalanceBand = SWITCH(TRUE(), Account[Balance] >= 200000, "High", Account[Balance] >= 40000, "Medium", "Low")
+		dataType: string
+		lineageTag: ea9f190d-4a07-4709-8849-fb52d25e2244
+		summarizeBy: none
+
+
+	partition Account = m
+		mode: import
+		source =
+				let
+					Source = Json.Document(Binary.Decompress(Binary.FromText("bVbLrmQ3CPyXXrslAwbDOlF+IMvRLLKIomxmMXl8f8rnGj/uRL1r1TFQFAVfvlCttVChWl6//vbvn9/++OtVrKmUF1eWd+V39dfXMnBU+Ma5h1SdSKI3JZKBxP8//fP9++/f/n4ViuqRL3ZAJ06KFD9wQmHtwbURmfvEtdLGeytwY9HqD5DfVN/UJlABlDNwbVV6RvY3ywQa3iM6kI2r1vlijTfpBHYA4wgtxAieoQnlTKAX+/QiSfO+eWSbyCgdv9cvP78Kh3WnxMhiBjT3q2KRTr3tsDQLQUQH2c9j4qQJQa00MyMG5CxBvZPSZk/qBApgdtLc28oNlfKEtaGCSwgk3Gk1ri9SSB/oKRnWWI1Dmlnvwx0y3fSxh/PRkJjIXp6an4qh00Wwvnn2jHy81M/8zGpsYE3yAplfQO9sjbOQtnrGqOIp+9CqTwXKKVWmB8hn8DDZOmhrShjTpBc5FEQtMrru6IIK7oKcdgtHryePjNj9Gj3Fi1R3RSkc1oGUDx51TLfttuQ8MdryaGeAyINmHYhpq3eMjsQtfVBD6rvkVQi0Wh92xoNhg9clac73ovAnQ/IwdGs3kKZipQ6onMR0Cd45ZmCBd/GT456CqEHJCy0GBd4lD/IZqSZxNKROhYkUMH3ZgrcmNTPccpVWWO/ApGGLnFF35qgFfJ92aBjAfjC0yraB1JyB4C2a/ubZO0zG6Mzkmrr12D7D+ZIP0KlWFWWJbQ4Lia74pUGMfOVt6mmtDT2J9Dc1YT5ym9KHrYCs02okOh+CSa/BLALYPh7rGE5LFQzXz4hYIzRe27ZvXeZ0foh+9q1hO3DqWUScDz2v5HSA0qDdx6jsTTPnvBm+H4nttkLz4VsBdSqgYcpaOZ2NiKPJRqZvNS/ySSvo7Fo2Y3EmLVGggSu6VjvSzJ2NlSb3IjHvxnK0ZAaHm0AM19QF3jzomZUrWhJLV9zDfDE9ejdRIOd2fmHLWj7cetaCldWe7j0txj0hvoNmi1UHKKfSupkds5YxQQlfxY7x2UPOy2K0D+SMiaVJft47WagXdOnyfJDHzj/qSqNAWtclA90cq3NmaNCyXvaMfUiUweG8yQp0DonFpS8s2bobR9M2jLGn0wyk0WZmXwmGbtw3AME0lH40IZxfEJfn9HrUul0j7Q9Kg7BOSXcyXh5k66JALkr3NsTBs+VHS37WB/KcYVf/n0PBvECAl6563TcoL+O1gJVdYmBiX/Yxxm42BaRqy5LdhWNfHZlep6K69OeYq30s7hnqUJ9dbgoZuB3dzZDI7B5LggHSyUsicfj6RbVjwbXj1kpNdzQl7l0Y0g5p5d3Rrdin+230ZJ8oH2V//Q8=", BinaryEncoding.Base64), Compression.Deflate)),
+					Table = Table.FromRows(Source, {"AccountID", "CustomerID", "BranchID", "AccountType", "Balance", "OpenDate"}),
+					Typed = Table.TransformColumnTypes(Table, {{"AccountID", Int64.Type}, {"CustomerID", Int64.Type}, {"BranchID", Int64.Type}, {"AccountType", type text}, {"Balance", type number}, {"OpenDate", type date}}, "en-US")
+				in
+					Typed
+
+	annotation PBI_ResultType = Table
