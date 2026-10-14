@@ -1,36 +1,36 @@
 table Customer
-	lineageTag: a4ad8a35-8fd0-45e1-b5b0-d6a70eff6707
+	lineageTag: 055978e2-dfc7-40f5-8687-6d2161b09637
 
 	column CustomerID
 		dataType: int64
 		isHidden
 		formatString: 0
-		lineageTag: 08f5fcda-2cf8-464e-ae02-fa34beeeec51
+		lineageTag: ca8d142d-28ac-4a7f-a956-81be5b1f973d
 		summarizeBy: none
 		sourceColumn: CustomerID
 
 	column CustomerName
 		dataType: string
-		lineageTag: 501baf76-c862-4853-8fb6-58cad17a76a3
+		lineageTag: 6b9fae61-4aa5-4339-b869-7e4489446156
 		summarizeBy: none
 		sourceColumn: CustomerName
 
 	column Gender
 		dataType: string
-		lineageTag: 1f08af48-6f61-4bfb-9da5-949604c393fa
+		lineageTag: e7b59ce4-463b-4f18-a085-d3b385d39f3e
 		summarizeBy: none
 		sourceColumn: Gender
 
 	column City
 		dataType: string
-		lineageTag: cf986134-f5c8-42be-8ca7-cae04c5a366f
+		lineageTag: e3a6f574-8c86-4ad4-b8cb-575154413600
 		summarizeBy: none
 		sourceColumn: City
 
 	column JoinDate
 		dataType: dateTime
 		formatString: dd-MMM-yyyy
-		lineageTag: dba26779-d6fa-430f-9e46-0fdc3e610442
+		lineageTag: 5d4645a1-caa8-4a79-bc26-fcce3e0ebeb5
 		summarizeBy: none
 		sourceColumn: JoinDate
 

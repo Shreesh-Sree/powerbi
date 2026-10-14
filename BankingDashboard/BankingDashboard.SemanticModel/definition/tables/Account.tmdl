@@ -1,11 +1,11 @@
 table Account
-	lineageTag: 2b5713e8-58f4-404b-a696-6646c556c327
+	lineageTag: c28a1036-c1e8-4f6a-921e-de189116233d
 
 	column AccountID
 		dataType: int64
 		isHidden
 		formatString: 0
-		lineageTag: 2a1b4ab5-b1b1-429a-97c3-ebbf43177711
+		lineageTag: 7642eaa0-4b1c-42aa-9b66-c547bf77a6a8
 		summarizeBy: none
 		sourceColumn: AccountID
 
@@ -13,7 +13,7 @@ table Account
 		dataType: int64
 		isHidden
 		formatString: 0
-		lineageTag: 9a3e2ea6-99dd-4dab-991f-d2ddab4e0efb
+		lineageTag: c6e5e012-e493-4b93-8a0c-931a30bc88e0
 		summarizeBy: none
 		sourceColumn: CustomerID
 
@@ -21,33 +21,33 @@ table Account
 		dataType: int64
 		isHidden
 		formatString: 0
-		lineageTag: 82b52e57-9c8f-4815-9d4f-85e295b7d0ac
+		lineageTag: 8ccbe60a-0a30-4f5f-8955-7eacd7469ef9
 		summarizeBy: none
 		sourceColumn: BranchID
 
 	column AccountType
 		dataType: string
-		lineageTag: 9a796634-cf61-4c63-80a9-9e9e43e9a831
+		lineageTag: 3d1ca66f-078b-4f57-b2b6-687921270ada
 		summarizeBy: none
 		sourceColumn: AccountType
 
 	column Balance
 		dataType: double
 		formatString: #,0.00
-		lineageTag: 8cc71901-5338-4a21-b3ce-b6e008d4d390
+		lineageTag: c2a41df6-8b10-49dd-b93d-6faa70fa8220
 		summarizeBy: sum
 		sourceColumn: Balance
 
 	column OpenDate
 		dataType: dateTime
 		formatString: dd-MMM-yyyy
-		lineageTag: 26d3712d-7d10-4139-8b39-1e03737775b5
+		lineageTag: 462cb62b-a2ec-4bc4-819b-77805e456e2f
 		summarizeBy: none
 		sourceColumn: OpenDate
 
 	column BalanceBand = SWITCH(TRUE(), Account[Balance] >= 200000, "High", Account[Balance] >= 40000, "Medium", "Low")
 		dataType: string
-		lineageTag: ea9f190d-4a07-4709-8849-fb52d25e2244
+		lineageTag: 57fffb9c-bef8-4237-b10c-c578a87ed367
 		summarizeBy: none
 
 

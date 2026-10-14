@@ -1,0 +1,27 @@
+// Paste each line into Power BI: Table tools > New measure (or Home > New measure). Table names: Branch, Customer, Account, Transactions, Date.
+// First create the Date table: Modeling > New table, paste the next line.
+Date = ADDCOLUMNS(CALENDAR(DATE(2024,1,1), DATE(2025,12,31)), "Year", YEAR([Date]), "Quarter", "Q" & QUARTER([Date]), "MonthNo", MONTH([Date]), "Month", FORMAT([Date], "MMM"))
+// Then select the Account table > New column:
+BalanceBand = SWITCH(TRUE(), Account[Balance] >= 200000, "High", Account[Balance] >= 40000, "Medium", "Low")
+// Then select the Transactions table > New measure, one at a time:
+Total Deposits = CALCULATE(SUM(Transactions[Amount]), Transactions[TxnType] = "Deposit")
+Total Withdrawals = CALCULATE(SUM(Transactions[Amount]), Transactions[TxnType] = "Withdraw")
+Total Txn Value = SUM(Transactions[Amount])
+Txn Count = COUNTROWS(Transactions)
+Total Balance = SUM(Account[Balance])
+Accounts = COUNTROWS(Account)
+Customers = DISTINCTCOUNT(Account[CustomerID])
+Avg Balance = AVERAGE(Account[Balance])
+South Deposits = CALCULATE([Total Deposits], Branch[Region] = "South")
+Chennai Deposits = CALCULATE([Total Deposits], FILTER(Branch, Branch[City] = "Chennai"))
+All Region Deposits = CALCULATE([Total Deposits], ALL(Branch[Region]))
+Region Share % = DIVIDE([Total Deposits], [All Region Deposits])
+Deposits YTD = TOTALYTD([Total Deposits], 'Date'[Date])
+Deposits MTD = TOTALMTD([Total Deposits], 'Date'[Date])
+Deposits QTD = TOTALQTD([Total Deposits], 'Date'[Date])
+Deposits LY = CALCULATE([Total Deposits], SAMEPERIODLASTYEAR('Date'[Date]))
+YoY Growth % = DIVIDE([Total Deposits] - [Deposits LY], [Deposits LY])
+Deposits by Settlement Date = CALCULATE([Total Deposits], USERELATIONSHIP('Date'[Date], Transactions[SettlementDate]))
+Avg Settlement Days = AVERAGEX(Transactions, DATEDIFF(Transactions[TxnDate], Transactions[SettlementDate], DAY))
+Selected Region = SELECTEDVALUE(Branch[Region], "All Regions")
+Report Title = "Banking Performance: " & [Selected Region] & " | Deposits " & FORMAT([Total Deposits], "#,0")

@@ -1,0 +1,61 @@
+CustomerID,CustomerName,Gender,City,JoinDate
+1,Divya Kumar,Female,Bengaluru,2022-08-17
+2,Nithya Sharma,Male,New Delhi,2023-03-09
+3,Priya Kumar,Male,Bengaluru,2022-08-27
+4,Lakshmi Menon,Male,New Delhi,2022-07-23
+5,Aditya Singh,Male,Pune,2023-08-27
+6,Anitha Kumar,Male,Singapore,2023-03-09
+7,Meena Rao,Male,Bengaluru,2024-02-21
+8,Meena Sharma,Male,Pune,2022-04-10
+9,Rahul Iyer,Female,Chennai,2024-01-18
+10,Pooja Das,Male,Pune,2022-03-22
+11,Aditya Rao,Female,New Delhi,2022-07-16
+12,Karthik Kumar,Male,Mumbai,2022-03-23
+13,Vikram Sharma,Female,Mumbai,2023-04-10
+14,Rahul Raj,Female,Mumbai,2022-08-03
+15,Anitha Sharma,Male,New Delhi,2024-01-17
+16,Vikram Raj,Female,Pune,2022-10-04
+17,Aditya Nair,Female,Chennai,2022-08-23
+18,Priya Iyer,Female,Mumbai,2022-03-09
+19,Sneha Menon,Female,Bengaluru,2023-11-03
+20,Manoj Singh,Female,Bengaluru,2022-09-29
+21,Nithya Nair,Female,Singapore,2023-08-22
+22,Deepak Menon,Female,Mumbai,2022-08-13
+23,Nithya Das,Female,Chennai,2024-02-13
+24,Priya Sharma,Male,Singapore,2022-06-13
+25,Deepak Menon,Male,Pune,2023-01-26
+26,Harish Reddy,Female,New Delhi,2024-05-31
+27,Arjun Sharma,Female,Singapore,2022-12-15
+28,Divya Rao,Female,Bengaluru,2023-04-10
+29,Arjun Rao,Male,New Delhi,2022-04-19
+30,Suresh Das,Male,Bengaluru,2023-01-18
+31,Ravi Das,Male,New Delhi,2022-11-28
+32,Manoj Kumar,Male,Mumbai,2024-06-18
+33,Suresh Nair,Male,Bengaluru,2024-06-18
+34,Isha Sharma,Male,Singapore,2023-05-13
+35,Karthik Das,Male,Bengaluru,2023-11-07
+36,Manoj Das,Male,Mumbai,2023-06-25
+37,Harish Singh,Male,New Delhi,2024-02-13
+38,Sneha Rao,Female,Singapore,2023-10-28
+39,Rahul Reddy,Female,Chennai,2022-09-11
+40,Vikram Sharma,Female,Chennai,2023-08-26
+41,Aditya Nair,Male,Chennai,2022-03-14
+42,Priya Nair,Male,Chennai,2024-05-30
+43,Meena Sharma,Male,Mumbai,2023-11-17
+44,Manoj Nair,Male,Singapore,2023-08-08
+45,Isha Reddy,Male,Pune,2024-04-06
+46,Deepak Nair,Male,Chennai,2023-11-06
+47,Deepak Iyer,Female,Pune,2023-04-24
+48,Priya Sharma,Male,Pune,2024-01-16
+49,Meena Sharma,Male,Bengaluru,2022-07-14
+50,Aditya Reddy,Male,Pune,2022-07-07
+51,Anitha Reddy,Male,Chennai,2023-03-30
+52,Aditya Sharma,Male,Singapore,2023-07-08
+53,Arjun Sharma,Male,Bengaluru,2023-02-21
+54,Manoj Reddy,Male,Pune,2022-03-02
+55,Ravi Singh,Male,Pune,2022-09-29
+56,Pooja Rao,Female,Singapore,2024-01-19
+57,Aditya Reddy,Male,Bengaluru,2022-10-31
+58,Sneha Kumar,Male,Singapore,2022-11-18
+59,Priya Kumar,Female,New Delhi,2024-05-23
+60,Lakshmi Raj,Male,New Delhi,2022-03-24

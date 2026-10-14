@@ -1,11 +1,11 @@
 table Transactions
-	lineageTag: dc5be558-9edf-4d50-9403-51d8dafd43c8
+	lineageTag: 5f422d42-dd6d-4ef3-82c6-a405669954c3
 
 	column TxnID
 		dataType: int64
 		isHidden
 		formatString: 0
-		lineageTag: 0f9cfffe-02df-4d59-a2dc-a40faebf2b30
+		lineageTag: 0f23f6b7-1b7b-422f-9988-ebfc00c33db5
 		summarizeBy: none
 		sourceColumn: TxnID
 
@@ -13,120 +13,120 @@ table Transactions
 		dataType: int64
 		isHidden
 		formatString: 0
-		lineageTag: 1eff09f7-c2bc-4d8f-b27a-fa8c397fa7fc
+		lineageTag: 1c530c5f-3320-49d6-ab58-20782de8f3d0
 		summarizeBy: none
 		sourceColumn: AccountID
 
 	column TxnDate
 		dataType: dateTime
 		formatString: dd-MMM-yyyy
-		lineageTag: 85bb8d5e-3a8d-454d-a179-72817594d31a
+		lineageTag: cf55c1a4-9767-49f3-994e-062fb541711f
 		summarizeBy: none
 		sourceColumn: TxnDate
 
 	column SettlementDate
 		dataType: dateTime
 		formatString: dd-MMM-yyyy
-		lineageTag: 12245d3b-10c0-45c3-82e3-1d4750d80fd8
+		lineageTag: 2646ce8b-b128-45c0-827d-6fd6b7f7bf5c
 		summarizeBy: none
 		sourceColumn: SettlementDate
 
 	column TxnType
 		dataType: string
-		lineageTag: 7d79517f-396f-4cd4-b1ee-15bc3e9def80
+		lineageTag: 99e5a8e4-0cbb-4b38-80ed-97debdcdb7b2
 		summarizeBy: none
 		sourceColumn: TxnType
 
 	column Amount
 		dataType: double
 		formatString: #,0.00
-		lineageTag: 6098a0ee-a6a9-4265-8e90-65d987ef7aa0
+		lineageTag: a49c7451-00c5-46ee-b86b-8f5920fa0173
 		summarizeBy: sum
 		sourceColumn: Amount
 
 	measure 'Total Deposits' = CALCULATE(SUM(Transactions[Amount]), Transactions[TxnType] = "Deposit")
 		formatString: #,0
-		lineageTag: 3156f85f-f8e6-4749-84d1-d0ed251518c0
+		lineageTag: e2e7d1d5-ea55-4ce5-a527-c8802b1e5bbe
 		displayFolder: Base
 	measure 'Total Withdrawals' = CALCULATE(SUM(Transactions[Amount]), Transactions[TxnType] = "Withdraw")
 		formatString: #,0
-		lineageTag: 3a9e72a9-6d2f-420e-8efd-8d243f55ca5f
+		lineageTag: 422ba3e7-5370-4dd2-bb38-172e43caf2a3
 		displayFolder: Base
 	measure 'Total Txn Value' = SUM(Transactions[Amount])
 		formatString: #,0
-		lineageTag: c201075b-fe9d-4594-b926-730068b52c41
+		lineageTag: 1aeb4ed0-652e-4bfd-ab69-4cf0426f2b6b
 		displayFolder: Base
 	measure 'Txn Count' = COUNTROWS(Transactions)
 		formatString: #,0
-		lineageTag: fe6f0f59-f64d-42d8-92bf-360cbddf97f9
+		lineageTag: a29c8324-232d-4466-a9e1-ecfde58e4021
 		displayFolder: Base
 	measure 'Total Balance' = SUM(Account[Balance])
 		formatString: #,0
-		lineageTag: 46176bb8-88dd-410a-ba33-e62f40d99ef4
+		lineageTag: 42bedca0-f1ef-4886-8c29-874c3c3137e8
 		displayFolder: Base
 	measure Accounts = COUNTROWS(Account)
 		formatString: #,0
-		lineageTag: d8fe9636-527d-4080-adaa-68ff227f6bbb
+		lineageTag: 184ff496-1970-438d-9d29-27f3e2c65dac
 		displayFolder: Base
 	measure Customers = DISTINCTCOUNT(Account[CustomerID])
 		formatString: #,0
-		lineageTag: 0bd46a4c-fc70-4352-931f-2bed7f691a4b
+		lineageTag: c5dbfc38-9f5d-42c3-ae05-43a2627f2af3
 		displayFolder: Base
 	measure 'Avg Balance' = AVERAGE(Account[Balance])
 		formatString: #,0
-		lineageTag: da475b9f-7615-42ef-8fb5-de38704bfdb2
+		lineageTag: 3c3dd6ff-1189-4e67-a11e-bbd274d6d51e
 		displayFolder: Base
 	measure 'South Deposits' = CALCULATE([Total Deposits], Branch[Region] = "South")
 		formatString: #,0
-		lineageTag: af33b0b3-a69e-4e77-b00f-19d4c932d00e
+		lineageTag: 932660c5-b3f4-46ff-aa0d-7ee3cc3a26b3
 		displayFolder: Region (CALCULATE / ALL)
 	measure 'Chennai Deposits' = CALCULATE([Total Deposits], FILTER(Branch, Branch[City] = "Chennai"))
 		formatString: #,0
-		lineageTag: 60fc291d-2388-4d47-a485-3c5df8b6d315
+		lineageTag: cc2ad9f9-bfa1-47c9-b1da-53cbe8fa47d9
 		displayFolder: Region (CALCULATE / ALL)
 	measure 'All Region Deposits' = CALCULATE([Total Deposits], ALL(Branch[Region]))
 		formatString: #,0
-		lineageTag: 3e9109e0-2dba-4d63-a4cd-161b5d4cf66d
+		lineageTag: 4b8a086d-8e93-42e2-8fc1-3c8cffd35bc2
 		displayFolder: Region (CALCULATE / ALL)
 	measure 'Region Share %' = DIVIDE([Total Deposits], [All Region Deposits])
 		formatString: 0.0%
-		lineageTag: 21400aa1-87e2-4928-be38-a41a950c800f
+		lineageTag: 62d7a94d-50c9-4cb5-b3b8-092a566ddc0e
 		displayFolder: Region (CALCULATE / ALL)
 	measure 'Deposits YTD' = TOTALYTD([Total Deposits], 'Date'[Date])
 		formatString: #,0
-		lineageTag: 9f061e7f-c96f-4f2f-b565-8e52efa4c339
+		lineageTag: cd08df0c-dd2b-486d-bacb-d7d67dc39ab1
 		displayFolder: Time Intelligence
 	measure 'Deposits MTD' = TOTALMTD([Total Deposits], 'Date'[Date])
 		formatString: #,0
-		lineageTag: 4d31a35c-1b8b-4b2b-aa66-136cabcd65d3
+		lineageTag: 7ed99ede-70eb-4f7a-8036-db7780c49e7c
 		displayFolder: Time Intelligence
 	measure 'Deposits QTD' = TOTALQTD([Total Deposits], 'Date'[Date])
 		formatString: #,0
-		lineageTag: 17f0297d-bacd-4fe8-a00f-68b0ca826f3d
+		lineageTag: 4913fdc8-cc1a-4846-9a87-9753c7c2d0cf
 		displayFolder: Time Intelligence
 	measure 'Deposits LY' = CALCULATE([Total Deposits], SAMEPERIODLASTYEAR('Date'[Date]))
 		formatString: #,0
-		lineageTag: ef743cec-c536-4a2a-8ce1-690350a2dd57
+		lineageTag: 5405152d-61ec-4b04-8641-5adc3c25e102
 		displayFolder: Time Intelligence
 	measure 'YoY Growth %' = DIVIDE([Total Deposits] - [Deposits LY], [Deposits LY])
 		formatString: 0.0%
-		lineageTag: 68e08b8c-42ef-4f10-b6f4-61e9c327406d
+		lineageTag: a4fc4809-54a4-44ad-9845-fd60e4cd3311
 		displayFolder: Time Intelligence
 	measure 'Deposits by Settlement Date' = CALCULATE([Total Deposits], USERELATIONSHIP('Date'[Date], Transactions[SettlementDate]))
 		formatString: #,0
-		lineageTag: 16446d7c-62b2-49fa-af95-ab15c75c23cf
+		lineageTag: 2d080b24-70bf-47d3-9c1e-b77232a5bce9
 		displayFolder: Settlement (USERELATIONSHIP)
 	measure 'Avg Settlement Days' = AVERAGEX(Transactions, DATEDIFF(Transactions[TxnDate], Transactions[SettlementDate], DAY))
 		formatString: 0.00
-		lineageTag: 7dd279c1-8753-4710-a9a2-23c40025a496
+		lineageTag: 9e242bf3-a05b-4b8b-9f88-7a962ea66063
 		displayFolder: Settlement (USERELATIONSHIP)
 	measure 'Selected Region' = SELECTEDVALUE(Branch[Region], "All Regions")
 		formatString: 0
-		lineageTag: 599dad08-1a03-40e1-bbe1-d48aca31e3ea
+		lineageTag: b64ba362-d4a9-4f70-aaca-3cedd222a283
 		displayFolder: Dynamic
 	measure 'Report Title' = "Banking Performance: " & [Selected Region] & " | Deposits " & FORMAT([Total Deposits], "#,0")
 		formatString: 0
-		lineageTag: f4c8da13-ca41-442c-8095-bb751947d4b7
+		lineageTag: ef3090f5-9d47-4f89-8f03-e6ed3f33a086
 		displayFolder: Dynamic
 
 	partition Transactions = m
