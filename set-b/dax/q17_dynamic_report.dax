@@ -1,0 +1,7 @@
+-- Q17 Dynamic Product and Region Report
+Selected Region = SELECTEDVALUE(Customer[Region], "All Regions")
+Selected Product = SELECTEDVALUE(Product[ProductName], "All Products")
+Sales Status = IF([Total Sales] >= 100000, "On Target", "Below Target")
+Sales Band = SWITCH(TRUE(), [Total Sales]>=200000,"Gold", [Total Sales]>=100000,"Silver","Bronze")
+Report Title = "Sales Report: " & [Selected Region] & " | " & [Selected Product] & " | " & FORMAT([Total Sales],"#,##0")
+-- Use Report Title as a card or visual Title > fx. Add slicers on Region and Product.

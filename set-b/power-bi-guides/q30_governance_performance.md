@@ -1,0 +1,4 @@
+# Q30 Governance and Performance Optimization
+**Performance**: star schema, remove unused columns, correct types, single-direction relationships, query folding, filter early, incremental refresh, DAX variables, avoid FILTER(table) and heavy iterators, fewer visuals per page, Performance Analyzer + DAX Studio.
+**Sharing**: workspace per domain/stage, Viewer role for consumers, distribute via Apps, shared/certified semantic models, sensitivity labels, no ad hoc personal sharing.
+**Governance strategy**: security (Entra groups, RLS, labels, export limits), performance standards (review before publish), refresh (scheduled off-peak, gateway HA, alerts), data ownership (named owner/steward, endorsement), controlled distribution (pipelines Dev>Test>Prod, app-based release, audit logs, usage metrics clean-up).

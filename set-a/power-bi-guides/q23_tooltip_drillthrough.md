@@ -1,0 +1,4 @@
+# Q23 Hospital Custom Tooltip and Drill-Through
+1. **Tooltip page**: add page `Tooltip`. Format page > Page information > **Allow use as tooltip** ON. Page size > Type = Tooltip. Add Cards (Patients, Revenue, Avg bill) and a small bar chart by Treatment. View > Page view > Actual size.
+2. **Assign**: select the target visual (e.g. Revenue by Department bar) > Format > General > Tooltips > Type = Report page > Page = `Tooltip`. Hover to test. Tooltip fields come from the hovered category.
+3. **Drill-through**: page `Patient Detail` with Patient[PatientName] / Doctor / Department in the Drill-through well, Keep all filters ON. Add a table (Patient, Doctor, Treatment, Bill amount, Date) and cards. In the main page right-click a data point > Drill through > Patient Detail. A back arrow button is generated.

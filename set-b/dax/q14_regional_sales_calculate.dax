@@ -1,0 +1,7 @@
+-- Q14 Regional Sales Analysis using CALCULATE
+Total Sales = SUM(Sales[Amount])
+South Sales = CALCULATE([Total Sales], FILTER(Customer, Customer[Region] = "South"))
+Electronics Sales = CALCULATE([Total Sales], Product[Category] = "Electronics")
+Large Orders Sales = CALCULATE([Total Sales], FILTER(Sales, Sales[Amount] > 10000))
+All Region Sales = CALCULATE([Total Sales], ALL(Customer[Region]))
+Region Share % = DIVIDE([Total Sales], [All Region Sales])

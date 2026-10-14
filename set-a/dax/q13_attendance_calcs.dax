@@ -1,0 +1,22 @@
+-- Q13 Employee Attendance Dashboard Calculations
+-- Task 1: calculated column (Attendance table; Table tools > New column)
+Attendance % = DIVIDE(Attendance[DaysPresent], Attendance[WorkingDays])
+Attendance Category =
+SWITCH(TRUE(),
+  Attendance[Attendance %] >= 0.95, "Excellent",
+  Attendance[Attendance %] >= 0.85, "Good",
+  Attendance[Attendance %] >= 0.75, "Average",
+  "Poor")
+
+-- Task 2: measures
+Total Working Hours = SUM(Attendance[WorkHours])
+Avg Working Hours = AVERAGE(Attendance[WorkHours])
+Employee Records = COUNTROWS(Attendance)
+Unique Employees = DISTINCTCOUNT(Attendance[EmpID])
+Avg Attendance % = AVERAGE(Attendance[Attendance %])
+Total Days Present = SUM(Attendance[DaysPresent])
+Poor Attendance Count = CALCULATE(COUNTROWS(Attendance), Attendance[Attendance Category]="Poor")
+
+-- Task 3: comparison
+-- Calculated column: fixed per row, stored in the model, used as axis/legend/slicer (e.g. clustered column: axis = Attendance Category, values = Employee Records).
+-- Measure: recalculated for the filter context, used as values (Card: Avg Working Hours; Matrix: Department x Avg Attendance %).

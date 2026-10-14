@@ -1,0 +1,13 @@
+-- Q18 Banking Transaction Date Analysis
+-- Task 1: Model view. Date[Date] -> Transaction[TxnDate]        (active, solid line)
+--                      Date[Date] -> Transaction[SettlementDate] (inactive, dashed: untick "Make this relationship active")
+Txn Amount (Transaction Date) = SUM(Transaction[Amount])
+
+-- Task 2
+Txn Amount (Settlement Date) =
+CALCULATE(SUM(Transaction[Amount]), USERELATIONSHIP('Date'[Date], Transaction[SettlementDate]))
+Settlement Delay Days = AVERAGEX(Transaction, DATEDIFF(Transaction[TxnDate], Transaction[SettlementDate], DAY))
+Unsettled Gap = [Txn Amount (Transaction Date)] - [Txn Amount (Settlement Date)]
+
+-- Task 3: clustered column or line chart, axis = Date[Month], values = both measures; add Date[Year] slicer.
+-- Where the bars differ, transactions were booked in one month and settled in the next.

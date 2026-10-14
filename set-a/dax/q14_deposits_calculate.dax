@@ -1,0 +1,12 @@
+-- Q14 Banking Region Analysis Using CALCULATE
+Total Deposits = SUM(Account[Balance])    -- or SUMX(FILTER(Transactions, Transactions[TxnType]="Deposit"), Transactions[Amount])
+
+Chennai Deposits = CALCULATE([Total Deposits], FILTER(Branch, Branch[City] = "Chennai"))
+South Region Deposits = CALCULATE([Total Deposits], Branch[Region] = "South")
+High Value Deposits = CALCULATE([Total Deposits], FILTER(Account, Account[Balance] > 100000))
+
+-- ALL ignores the region filter coming from a slicer/axis
+All Region Deposits = CALCULATE([Total Deposits], ALL(Branch[Region]))
+Region % of Total = DIVIDE([Total Deposits], [All Region Deposits])
+Total Deposits All Branches = CALCULATE([Total Deposits], ALL(Branch))
+-- Visual: matrix/bar with Region on axis; Total Deposits changes per region while All Region Deposits stays constant.

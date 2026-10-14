@@ -1,0 +1,10 @@
+-- Q13 Employee Salary Dashboard Calculations
+Salary Band = SWITCH(TRUE(), Employee[Salary]>=70000,"High", Employee[Salary]>=45000,"Medium","Low")   -- calculated column
+Total Salary = SUM(Employee[Salary])
+Average Salary = AVERAGE(Employee[Salary])
+Employee Count = COUNTROWS(Employee)
+Max Salary = MAX(Employee[Salary])
+Min Salary = MIN(Employee[Salary])
+High Earners = CALCULATE(COUNTROWS(Employee), Employee[Salary Band]="High")
+-- Calculated column = row level, stored, good for slicers/axis (bar: Salary Band x Employee Count).
+-- Measure = aggregated in filter context (card: Average Salary; table: Department x Total Salary).

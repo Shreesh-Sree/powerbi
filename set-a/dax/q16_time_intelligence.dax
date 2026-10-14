@@ -1,0 +1,23 @@
+-- Q16 Banking Time Intelligence
+-- Task 1: Date table (Modeling > New table). Mark as date table, relate Date[Date] -> Transactions[TxnDate]
+Date =
+ADDCOLUMNS(
+  CALENDAR(DATE(2023,1,1), DATE(2026,12,31)),
+  "Year", YEAR([Date]), "MonthNo", MONTH([Date]),
+  "Month", FORMAT([Date],"MMM"), "Quarter", "Q" & QUARTER([Date]))
+-- sort Month by MonthNo
+
+Total Deposits = SUMX(FILTER(Transactions, Transactions[TxnType]="Deposit"), Transactions[Amount])
+Total Transactions Value = SUM(Transactions[Amount])
+
+-- Task 2
+Deposits YTD = TOTALYTD([Total Deposits], 'Date'[Date])
+Deposits MTD = TOTALMTD([Total Deposits], 'Date'[Date])
+Deposits QTD = TOTALQTD([Total Deposits], 'Date'[Date])
+Txn Value YTD = TOTALYTD([Total Transactions Value], 'Date'[Date])
+
+-- Task 3
+Deposits LY = CALCULATE([Total Deposits], SAMEPERIODLASTYEAR('Date'[Date]))
+YoY Growth = [Total Deposits] - [Deposits LY]
+YoY % = DIVIDE([YoY Growth], [Deposits LY])
+-- Visual: line chart (axis Month, values Total Deposits + Deposits LY), card for YoY %.

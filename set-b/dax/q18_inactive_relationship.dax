@@ -1,0 +1,6 @@
+-- Q18 Inactive Relationship Sales Analysis
+-- Model view: Date[Date] -> Sales[OrderDate] (active), Date[Date] -> Sales[DeliveryDate] (inactive, dashed)
+Sales by Order Date = SUM(Sales[Amount])
+Sales by Delivery Date = CALCULATE(SUM(Sales[Amount]), USERELATIONSHIP('Date'[Date], Sales[DeliveryDate]))
+Avg Delivery Days = AVERAGEX(Sales, DATEDIFF(Sales[OrderDate], Sales[DeliveryDate], DAY))
+-- Visual: clustered column, axis Date[Month], values both measures.

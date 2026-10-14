@@ -1,0 +1,10 @@
+-- Q15 Hospital Treatment Analysis Using Iterator Functions
+Total Treatment Revenue = SUMX(Treatment, Treatment[Quantity] * Treatment[TreatmentPrice])
+Avg Revenue per Treatment =
+AVERAGEX(VALUES(Treatment[TreatmentName]), [Total Treatment Revenue])
+Avg Revenue per Record = AVERAGEX(Treatment, Treatment[Quantity] * Treatment[TreatmentPrice])
+High Cost Treatments = COUNTROWS(FILTER(Treatment, Treatment[TreatmentPrice] > 5000))
+High Volume Treatments = COUNTROWS(FILTER(Treatment, Treatment[Quantity] >= 10))
+High Cost and Volume =
+COUNTROWS(FILTER(Treatment, Treatment[TreatmentPrice] > 5000 && Treatment[Quantity] >= 10))
+-- Why SUMX: SUM cannot multiply two columns row by row; the iterator evaluates the expression per row, then adds.

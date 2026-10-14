@@ -1,0 +1,4 @@
+# Q22 Banking Report Using Bookmarks
+1. **Visual states**: build three groups of visuals on one page: Customer (customers by city, new customers trend), Deposit (deposit by branch, total deposits card), Transaction (txn value by month, txn count). Use View > **Selection pane** to group each set (Ctrl+click > Group) and name them `Customer View`, `Deposit View`, `Transaction View`.
+2. **Bookmarks**: hide the other two groups with the eye icon, then View > Bookmarks pane > Add. Name it `Customer`. Repeat for the other two (show only that group each time). Right-click each bookmark > untick **Data** if you want filters unchanged, keep **Display** ticked.
+3. **Buttons**: Insert > Buttons > Blank. Text = Customer / Deposit / Transaction. Format > Action > Type = **Bookmark**, choose matching bookmark. Add a Home button to the first view. Test with Ctrl+Click in Desktop (or Reading view).

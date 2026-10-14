@@ -1,0 +1,5 @@
+-- Q15 Product Performance using Iterator Functions
+Total Sales (Row-level) = SUMX(Sales, Sales[Quantity] * RELATED(Product[UnitPrice]))
+Avg Product Sales = AVERAGEX(VALUES(Product[ProductName]), [Total Sales])
+Products Above 20000 = COUNTROWS(FILTER(VALUES(Product[ProductID]), [Total Sales] > 20000))
+Premium Products = COUNTROWS(FILTER(Product, Product[UnitPrice] > 10000))

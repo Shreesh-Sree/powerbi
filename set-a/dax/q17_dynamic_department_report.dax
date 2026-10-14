@@ -1,0 +1,26 @@
+-- Q17 Dynamic Hospital Department Report
+-- Task 1
+Selected Department = SELECTEDVALUE(Department[DeptName], "All Departments")
+Selected Doctor = SELECTEDVALUE(Doctor[DoctorName], "All Doctors")
+
+-- Task 2: IF and SWITCH
+Revenue Status = IF([Total Revenue] >= 100000, "Target Met", "Below Target")
+Revenue Band =
+SWITCH(TRUE(),
+  [Total Revenue] >= 500000, "Platinum",
+  [Total Revenue] >= 250000, "Gold",
+  [Total Revenue] >= 100000, "Silver",
+  "Bronze")
+Dynamic Metric =
+SWITCH(SELECTEDVALUE(MetricSelector[Metric], "Revenue"),
+  "Revenue", [Total Revenue],
+  "Patients", [Total Patients],
+  "Appointments", [Total Appointments],
+  BLANK())
+
+-- Task 3: dynamic title (use in visual Title > fx > Field value)
+Report Title =
+"Hospital Performance: " & [Selected Department] &
+IF(ISFILTERED(Doctor[DoctorName]), " | Dr. " & [Selected Doctor], "") &
+" | Revenue: " & FORMAT([Total Revenue], "#,##0")
+-- Add a slicer on Department[DeptName] and one on Doctor[DoctorName]; for MetricSelector create Home > Enter data table with Revenue/Patients/Appointments.

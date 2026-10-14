@@ -1,0 +1,9 @@
+-- Q16 Time Intelligence Sales Dashboard
+Date = ADDCOLUMNS(CALENDAR(DATE(2023,1,1), DATE(2026,12,31)), "Year", YEAR([Date]), "MonthNo", MONTH([Date]), "Month", FORMAT([Date],"MMM"))
+-- Mark as date table; relate Date[Date] -> Sales[OrderDate]
+Total Sales = SUM(Sales[Amount])
+Sales YTD = TOTALYTD([Total Sales], 'Date'[Date])
+Sales MTD = TOTALMTD([Total Sales], 'Date'[Date])
+Sales LY = CALCULATE([Total Sales], SAMEPERIODLASTYEAR('Date'[Date]))
+YoY % = DIVIDE([Total Sales]-[Sales LY], [Sales LY])
+-- Visuals: line chart (Month: Total Sales vs Sales LY), cards for YTD/MTD, column chart for YoY %.
